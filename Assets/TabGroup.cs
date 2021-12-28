@@ -1,46 +1,56 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
 public class TabGroup : MonoBehaviour
 {
-    public List<TabButton> tabButtons;
-
-    public Sprite tabIdle;
-    public Sprite tabHover;
-    public Sprite tabActive;
-    public void Subscribe(TabButton button)
+    public List<TabButtonScript> tabButtons;
+    public TabButtonScript selectedTab;
+    
+    
+    public Color tabIdle;
+    public Color tabHover;
+    public Color tabActive;
+    public void Subscribe(TabButtonScript button)
     {
         if (tabButtons == null)
         {
-            tabButtons = new List<TabButton>();
+            tabButtons = new List<TabButtonScript>();
         }
         tabButtons.Add(button);
     }
 
-    public void OnTabEnter(TabButton button)
+    private void Start()
     {
-        ResetTabs();
-        //button.background.sprite = tabHover;
+        
     }
 
-    public void OnTabExit(TabButton button)
+    public void OnTabEnter(TabButtonScript button)
     {
         ResetTabs();
+        button.background.color = tabHover;
     }
 
-    public void OnTabSelected(TabButton button)
+    public void OnTabExit(TabButtonScript button)
     {
         ResetTabs();
-        //button.background.sprite = tabActive;
+        //button.background.color = tabIdle;
+    }
+
+    public void OnTabSelected(TabButtonScript button)
+    {
+        selectedTab = button;
+        ResetTabs();
+        button.background.color = tabActive;
     }
 
     public void ResetTabs()
     {
-        foreach (TabButton button in tabButtons)
+        foreach (TabButtonScript button in tabButtons)
         {
-            //button.background.sprite = tabIdle;
+            button.background.color = tabIdle;
         }
     }
 }
