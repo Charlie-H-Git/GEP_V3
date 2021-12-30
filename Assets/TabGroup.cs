@@ -1,46 +1,75 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
 public class TabGroup : MonoBehaviour
 {
-    public List<TabButton> tabButtons;
+    public List<TabButtonScript> tabButtons;
+    public TabButtonScript selectedTab;
 
-    public Sprite tabIdle;
-    public Sprite tabHover;
-    public Sprite tabActive;
-    public void Subscribe(TabButton button)
+    public List<GameObject> ui_Pages;
+    public int panelIndex;
+
+    public Color tabIdle;
+    public Color tabHover;
+    public Color tabActive;
+    public void Subscribe(TabButtonScript button)
     {
         if (tabButtons == null)
         {
-            tabButtons = new List<TabButton>();
+            tabButtons = new List<TabButtonScript>();
         }
         tabButtons.Add(button);
     }
+    
 
-    public void OnTabEnter(TabButton button)
+    public void OnTabEnter(TabButtonScript button)
     {
         ResetTabs();
-        //button.background.sprite = tabHover;
+        if (selectedTab == null || button != selectedTab)
+        {
+            button.background.color = tabHover;
+        }
+        
     }
 
-    public void OnTabExit(TabButton button)
+    public void OnTabExit(TabButtonScript button)
     {
         ResetTabs();
+        //button.background.color = tabIdle;
     }
 
-    public void OnTabSelected(TabButton button)
+    public void OnTabSelected(TabButtonScript button)
     {
+        selectedTab = button;
         ResetTabs();
-        //button.background.sprite = tabActive;
+        button.background.color = tabActive;
+        int index = button.transform.GetSiblingIndex();
+        for (int i = 0; i < ui_Pages.Count; i++)
+        {
+            if (i == index)
+            {
+                ui_Pages[i].SetActive(true);
+            }
+            else
+            {
+                ui_Pages[i].SetActive(false);
+            }
+        }
     }
 
     public void ResetTabs()
     {
-        foreach (TabButton button in tabButtons)
+        foreach (TabButtonScript button in tabButtons)
         {
-            //button.background.sprite = tabIdle;
+            if (selectedTab != null && button == selectedTab )
+            {
+                continue;
+            }
+            button.background.color = tabIdle;
         }
     }
+    
 }
