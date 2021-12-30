@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Resources;
 using System.Security.Cryptography.X509Certificates;
@@ -6,11 +7,14 @@ using UnityEngine;
 
 public class PlanetMarket : MonoBehaviour
 {
+   
     public int _tradeMode = 0;
 
     private bool _playerPrescence;
-    // Update is called once per frame
-    void Update()
+
+    public Canvas tradeCanvas;
+
+    private void OnTriggerStay(Collider other)
     {
         if (Input.GetKeyDown(KeyCode.Tab))
         {
@@ -21,7 +25,13 @@ public class PlanetMarket : MonoBehaviour
                 _tradeMode = 0;
             }
             
-        }
+        } 
+    }
+
+    // Update is called once per frame
+    void Update()
+    {
+        
         switch (_tradeMode)
         {
             case 2 :
@@ -38,6 +48,7 @@ public class PlanetMarket : MonoBehaviour
 
     void BuyMode()
     {
+        tradeCanvas.enabled = true;
         //Debug.Log("BuyMode");
     }
     private void SellMode()
@@ -47,6 +58,7 @@ public class PlanetMarket : MonoBehaviour
 
     private void NeutralMode()
     {
+        tradeCanvas.enabled = false;
         //Debug.Log("NeutralMode");
     }
 
