@@ -15,13 +15,13 @@ public class UI_item : MonoBehaviour
     public ItemType itemtype;
     
 
-    private void Awake()
+    private void Start()
     {
         int index = (int) itemtype;
         //planetMarket = GetComponent<PlanetMarket>();
         nameText.text = itemtype.ToString();
         costText.text = ("Cost = " + planetMarket.TradeGoodsList[index].Price.ToString("C"));
-        
+        quantityText.text = "Quantity = " + planetMarket.TradeGoodsList[index].Quantity;
     }
     
 }
