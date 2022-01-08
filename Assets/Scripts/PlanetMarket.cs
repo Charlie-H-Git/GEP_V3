@@ -23,25 +23,47 @@ public class PlanetMarket : MonoBehaviour
     {
         for (int i = 0; i < TradeGoodsList.Count; i++)
         {
+            //Planet List = a
             int a = TradeGoodsList[i].Quantity;
+            //Reference List = b
             int b = TradeGoodsBaselines[i].Quantity;
             double basePrice = TradeGoodsBaselines[i].Price;
-            int dif = b - a;
-            
-            float multiplier = (float)dif / 10f;
-            if (multiplier < 0)
-            {
-                multiplier = 1;
-            }
+            double price = TradeGoodsList[i].Price;
 
-            TradeGoodsList[i].Price = TradeGoodsBaselines[i].Price * multiplier;
+            if (TradeGoodsBaselines[i].Quantity < TradeGoodsList[i].Quantity)
+            {
             
-            //Debug.Log( $"Item Name: " + TradeGoodsList[i].ItemType + $" multiplier = " + multiplier + $" Base Price = " + basePrice + $" Price Result = " + TradeGoodsList[i].Price );
+                dif = a - b;
+                negMultiplier = (dif - 5f) / 100f;
+                //this.negMultiplier = Mathf.Clamp01(negMultiplier);
+                //Debug.Log($"Difference = " + dif + $" posMultiplier = " + multiplier + $" negMultiplier = " + negMultiplier);
+                TradeGoodsList[i].Price = TradeGoodsBaselines[i].Price - this.negMultiplier;
+                if (TradeGoodsList[i].Price < 0)
+                {
+                    TradeGoodsList[i].Price = 1.5;
+                }
+             
+            }
+            else
+            {
+                if (TradeGoodsBaselines[i].Quantity > TradeGoodsList[i].Quantity)
+                {
+                    dif = b - a; 
+                    multiplier = (dif - 10) / 15f;
+                    if (multiplier == 0)
+                    {
+                        multiplier = 1;
+                    }
+                    //Debug.Log($"Difference = " + dif + $" posMultiplier = " + multiplier + $" negMultiplier = " + negMultiplier);
+                    TradeGoodsList[i].Price = TradeGoodsBaselines[i].Price + (multiplier);
+                }
+            }
+       
         }
 
-        yield return new WaitForSeconds(5);
-        print("ding");
-         StartCoroutine(PriceCalc());
+        yield return new WaitForSeconds(0.5f);
+        //print("ding");
+        StartCoroutine(PriceCalc());
 
     }
 
@@ -50,52 +72,7 @@ public class PlanetMarket : MonoBehaviour
     private float multiplier; 
     private void Awake()
     {
-        //Planet List = a
-        int a = TradeGoodsList[0].Quantity;
-        //Reference List = b
-        int b = TradeGoodsBaselines[0].Quantity;
-        double basePrice = TradeGoodsBaselines[0].Price;
-        double price = TradeGoodsList[0].Price;
-
-        if (TradeGoodsBaselines[0].Quantity < TradeGoodsList[0].Quantity)
-        {
-            
-             dif = a - b;
-             negMultiplier = (dif - 5f) / 100f;
-             //this.negMultiplier = Mathf.Clamp01(negMultiplier);
-             Debug.Log($"Difference = " + dif + $" posMultiplier = " + multiplier + $" negMultiplier = " + negMultiplier);
-             TradeGoodsList[0].Price = TradeGoodsBaselines[0].Price - this.negMultiplier;
-             if (TradeGoodsList[0].Price < 0)
-             {
-                 TradeGoodsList[0].Price = 1.5;
-             }
-             //TradeGoodsList[0].Price = TradeGoodsList[0].Price + 1;
-        }
-        else
-        {
-            if (TradeGoodsBaselines[0].Quantity > TradeGoodsList[0].Quantity)
-            {
-                dif = b - a; 
-                multiplier = (dif - 10) / 10f;
-                if (multiplier == 0)
-                {
-                    multiplier = 1;
-                }
-                Debug.Log($"Difference = " + dif + $" posMultiplier = " + multiplier + $" negMultiplier = " + negMultiplier);
-                TradeGoodsList[0].Price = TradeGoodsBaselines[0].Price + (multiplier);
-            }
-        }
-        
-       
-        
-        
-        
-
-        
-
-        
-        
-        //StartCoroutine(PriceCalc());
+        StartCoroutine(PriceCalc());
     }
 }
 [System.Serializable]
