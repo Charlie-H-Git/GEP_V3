@@ -9,6 +9,7 @@ using UnityEngine.PlayerLoop;
 
 public class PlanetMarket : MonoBehaviour
 {
+    public WaypointManager WaypointManager;
     public List<TradeGoods> TradeGoodsList;
     public List<TradeGoodsBaseline> TradeGoodsBaselines;
     public float PlanetWallet;
@@ -16,7 +17,7 @@ public class PlanetMarket : MonoBehaviour
     public TMP_Text planetWalletUI;
     public TMP_Text planetName;
     public GameObject TradeHud;
-    public PlanetMarkEnum PlanetMarkEnum;
+    private UI_item _uiItem;
     /// <summary>
     /// price and quantity as baselines
     ///
@@ -68,16 +69,32 @@ public class PlanetMarket : MonoBehaviour
        
         }
 
-        yield return new WaitForSeconds(0.5f);
+        yield return new WaitForSeconds(0.1f);
         //print("ding");
         if (trading)
         {
+            
             planetWalletUI.text = PlanetWallet.ToString("C");
-            planetName.text = gameObject.name;  
+            planetName.text = gameObject.name;
+            
         }
         
         StartCoroutine(PriceCalc());
 
+    }
+
+    IEnumerator Stock()
+    {
+        for (int i = 0; i < TradeGoodsList.Count; i++)
+        {
+            if (TradeGoodsList[i].Quantity < 0)
+            {
+                TradeGoodsList[i].Quantity = 0;
+            }
+        }
+
+        yield return new WaitForSeconds(0.1f);
+        StartCoroutine(Stock());
     }
 
     private int dif;
@@ -85,14 +102,17 @@ public class PlanetMarket : MonoBehaviour
     private float multiplier; 
     private void Awake()
     {
+        StartCoroutine(Stock());
         StartCoroutine(PriceCalc());
     }
 
-    private bool trading = false;
+    public bool trading = false;
     private void OnTriggerEnter(Collider other)
     {
-        TradeHud.SetActive(true);
+        WaypointManager.allowWaypoint = false;
+        Time.timeScale = 0.1f;
         trading = true;
+        TradeHud.SetActive(true);
     }
 
     private void OnTriggerExit(Collider other)

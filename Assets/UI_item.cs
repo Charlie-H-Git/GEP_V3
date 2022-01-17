@@ -12,17 +12,12 @@ public enum TradeMode
     sell
 }
 
-public enum PlanetMarkEnum
-{
-    smallPlanet,
-    earthLike,
-    Jupiter
-}
+
 public class UI_item : MonoBehaviour
 {
-    [Header("Planets")] 
-    public List<GameObject> PlanetMarketReference = new List<GameObject>();
-
+    [Header("Planets")]
+    public GameObject[] planetGameObjectArray;
+    
     [Header("Text Boxes")]
     public TMP_Text nameText;
     public TMP_Text costText;
@@ -35,11 +30,11 @@ public class UI_item : MonoBehaviour
     public Button minusButton;
 
     [Header("Script References")]
-    public PlanetMarkEnum planMarkEnum;
+    //public PlanetMarkEnum planMarkEnum;
     public ItemType itemType;
     public TradeMode tradeMode;
-    public PlanetMarket planetMarket;
-    private PlayerTradeController _playerTradeController;
+    private PlanetMarket planetMarket;
+    public PlayerTradeController _playerTradeController;
 
     [Header("Integers")] 
     public int tradeAmount;
@@ -51,10 +46,7 @@ public class UI_item : MonoBehaviour
 
     private void Awake()
     {
-       
-        _playerTradeController = GetComponent<PlayerTradeController>();
         inputField.contentType = TMP_InputField.ContentType.IntegerNumber;
-       
     }
 
     private void Start()
@@ -80,11 +72,16 @@ public class UI_item : MonoBehaviour
 
     private void OnEnable()
     {
-        var planetmarkindex = (int)planMarkEnum;
-        print(planetmarkindex);
-        PlanetMarket currentMarket = PlanetMarketReference[planetmarkindex].gameObject.GetComponent<PlanetMarket>();
-        planetMarket = currentMarket;
-        StartCoroutine(TradePanel());
+        foreach (var p in planetGameObjectArray)
+        {
+            if (p.GetComponent<PlanetMarket>().trading)
+            {
+                planetMarket = p.GetComponent<PlanetMarket>();
+                //Debug.Log("planet market assigned");
+                StartCoroutine(TradePanel());
+            }
+        }
+        
     }
 
     IEnumerator TradePanel()
@@ -96,9 +93,13 @@ public class UI_item : MonoBehaviour
         quantityText.text = "Quantity = " + planetMarket.TradeGoodsList[index].Quantity;
         int.TryParse(inputField.text, out int result);
         tradeAmount = result;
-        yield return new WaitForSeconds(0.5f);
+        yield return new WaitForSeconds(0.1f);
         StartCoroutine(TradePanel());
     }
+    
+    /// <summary>
+    /// TODO: Add limit and rejection for transactions bigger than players total balance do the same for planet wallet too
+    /// </summary>
     
     void TradeBtnClick()
     {
@@ -108,6 +109,8 @@ public class UI_item : MonoBehaviour
             planetMarket.TradeGoodsList[index].Quantity = planetMarket.TradeGoodsList[index].Quantity - tradeAmount;
             _playerTradeController.floatWallet = _playerTradeController.floatWallet - ((float)planetMarket.TradeGoodsList[index].Price * tradeAmount);
             planetMarket.PlanetWallet = planetMarket.PlanetWallet + (float)planetMarket.TradeGoodsList[index].Price * tradeAmount;
+            _playerTradeController.PlayerInventory[index].Quantity =
+                _playerTradeController.PlayerInventory[index].Quantity + tradeAmount;
             //Subtract cost of quantity multiplied by trade amount from player
         }
 
@@ -117,6 +120,8 @@ public class UI_item : MonoBehaviour
             _playerTradeController.floatWallet = _playerTradeController.floatWallet + ((float)planetMarket.TradeGoodsList[index].Price * tradeAmount);
             _playerTradeController.activeStorage = _playerTradeController.activeStorage + tradeAmount; 
             planetMarket.PlanetWallet = planetMarket.PlanetWallet - (float)planetMarket.TradeGoodsList[index].Price * tradeAmount;
+            _playerTradeController.PlayerInventory[index].Quantity =
+                _playerTradeController.PlayerInventory[index].Quantity - tradeAmount;
             //Add cost of quantity multiplied by the trade amount to player
         }
         

@@ -6,16 +6,18 @@ using UnityEngine;
 using UnityEngine.UIElements;
 using Image = UnityEngine.UI.Image;
 
+
 public class PlayerTradeController : MonoBehaviour
 {
     public float floatWallet;
 
     public Canvas storageHUD;
-    public TMP_Text playerWallet;
 
     public GameObject unit;
     private List<GameObject> _unitList = new List<GameObject>();
 
+    public List<TradeGoods> PlayerInventory;
+    
     public TMP_Text walletTMPText;
     public TMP_Text cargoTMPText;
     
@@ -52,6 +54,7 @@ public class PlayerTradeController : MonoBehaviour
 
     private void cargo()
     {
+        
         int division = storageCapacity / unitCount;
         int activeUnits = storageCapacity - (storageCapacity - activeStorage);
         activeUnits = activeUnits / division;
@@ -80,7 +83,7 @@ public class PlayerTradeController : MonoBehaviour
     public void Wallet()
     {
         walletTMPText.text = floatWallet.ToString("C");
-        playerWallet.text = floatWallet.ToString("C");
+        
     }
     
     private void Update()

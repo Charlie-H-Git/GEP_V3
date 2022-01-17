@@ -1019,6 +1019,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bb6fa05b7930d4765999098510d39288, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  planetGameObjectArray: []
   nameText: {fileID: 39946564}
   costText: {fileID: 70300181}
   quantityText: {fileID: 1825391062}
@@ -1028,7 +1029,6 @@ MonoBehaviour:
   minusButton: {fileID: 1596028357}
   itemType: 2
   tradeMode: 0
-  planetMarket: {fileID: 314060055}
   tradeAmount: 0
   index: 0
   buyMode: 0
@@ -2611,7 +2611,7 @@ GameObject:
   - component: {fileID: 314060055}
   m_Layer: 0
   m_Name: PseudoPlanet
-  m_TagString: Untagged
+  m_TagString: Planet
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -2687,7 +2687,9 @@ MonoBehaviour:
   PlanetWallet: 6000
   planetWalletUI: {fileID: 1680131166}
   planetName: {fileID: 458819373}
-  dif: 0
+  TradeHud: {fileID: 789781930}
+  PlayerHud: {fileID: 0}
+  trading: 0
 --- !u!4 &314060056
 Transform:
   m_ObjectHideFlags: 0
@@ -3207,6 +3209,7 @@ GameObject:
   - component: {fileID: 357585904}
   - component: {fileID: 357585903}
   - component: {fileID: 357585902}
+  - component: {fileID: 357585905}
   m_Layer: 5
   m_Name: Player Wallet
   m_TagString: Untagged
@@ -3332,6 +3335,20 @@ RectTransform:
   m_AnchoredPosition: {x: 70.69998, y: -8.400002}
   m_SizeDelta: {x: 112.94, y: 15.2}
   m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &357585905
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 357585901}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8fee0214bc07646d2b0cc95dba8b20d5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  PTC: {fileID: 2081227533}
+  _planetMarket: {fileID: 314060055}
 --- !u!1 &383626842
 GameObject:
   m_ObjectHideFlags: 0
@@ -5163,6 +5180,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bb6fa05b7930d4765999098510d39288, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  planetGameObjectArray: []
   nameText: {fileID: 690744034}
   costText: {fileID: 1996288203}
   quantityText: {fileID: 805213681}
@@ -5172,7 +5190,6 @@ MonoBehaviour:
   minusButton: {fileID: 875327670}
   itemType: 8
   tradeMode: 0
-  planetMarket: {fileID: 314060055}
   tradeAmount: 0
   index: 0
   buyMode: 0
@@ -7631,6 +7648,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bb6fa05b7930d4765999098510d39288, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  planetGameObjectArray: []
   nameText: {fileID: 1488993571}
   costText: {fileID: 132235214}
   quantityText: {fileID: 1281994180}
@@ -7640,7 +7658,6 @@ MonoBehaviour:
   minusButton: {fileID: 312120459}
   itemType: 1
   tradeMode: 0
-  planetMarket: {fileID: 314060055}
   tradeAmount: 0
   index: 0
   buyMode: 0
@@ -8005,6 +8022,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bb6fa05b7930d4765999098510d39288, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  planetGameObjectArray: []
   nameText: {fileID: 1208839675}
   costText: {fileID: 1597846028}
   quantityText: {fileID: 1748058388}
@@ -8014,7 +8032,6 @@ MonoBehaviour:
   minusButton: {fileID: 1531886526}
   itemType: 4
   tradeMode: 0
-  planetMarket: {fileID: 314060055}
   tradeAmount: 0
   index: 0
   buyMode: 0
@@ -8864,6 +8881,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bb6fa05b7930d4765999098510d39288, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  planetGameObjectArray: []
   nameText: {fileID: 210184766}
   costText: {fileID: 175350860}
   quantityText: {fileID: 113498418}
@@ -8873,7 +8891,6 @@ MonoBehaviour:
   minusButton: {fileID: 1577130805}
   itemType: 3
   tradeMode: 0
-  planetMarket: {fileID: 314060055}
   tradeAmount: 0
   index: 0
   buyMode: 0
@@ -9183,6 +9200,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bb6fa05b7930d4765999098510d39288, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  planetGameObjectArray: []
   nameText: {fileID: 1523965441}
   costText: {fileID: 1771496082}
   quantityText: {fileID: 535445652}
@@ -9192,7 +9210,6 @@ MonoBehaviour:
   minusButton: {fileID: 777306952}
   itemType: 6
   tradeMode: 0
-  planetMarket: {fileID: 314060055}
   tradeAmount: 0
   index: 0
   buyMode: 0
@@ -9537,6 +9554,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bb6fa05b7930d4765999098510d39288, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  planetGameObjectArray: []
   nameText: {fileID: 602532384}
   costText: {fileID: 53152119}
   quantityText: {fileID: 65955399}
@@ -9546,7 +9564,6 @@ MonoBehaviour:
   minusButton: {fileID: 323851939}
   itemType: 7
   tradeMode: 0
-  planetMarket: {fileID: 314060055}
   tradeAmount: 0
   index: 0
   buyMode: 0
@@ -9741,7 +9758,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!114 &1122003085
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -15355,6 +15372,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bb6fa05b7930d4765999098510d39288, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  planetGameObjectArray: []
   nameText: {fileID: 383626844}
   costText: {fileID: 1687284818}
   quantityText: {fileID: 2082720369}
@@ -15364,7 +15382,6 @@ MonoBehaviour:
   minusButton: {fileID: 505044020}
   itemType: 5
   tradeMode: 0
-  planetMarket: {fileID: 314060055}
   tradeAmount: 0
   index: 0
   buyMode: 0
@@ -16566,7 +16583,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   floatWallet: 5000
   storageHUD: {fileID: 1775390153}
-  playerWallet: {fileID: 357585902}
   unit: {fileID: 6040107497681237265, guid: bffed18b80d70964283266407c431fe2, type: 3}
   walletTMPText: {fileID: 1205183173}
   cargoTMPText: {fileID: 964157137}
@@ -18695,6 +18711,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bb6fa05b7930d4765999098510d39288, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  planetGameObjectArray: []
   nameText: {fileID: 4283494782356186319}
   costText: {fileID: 6582741799596875250}
   quantityText: {fileID: 6299570861558180399}
@@ -18704,7 +18721,6 @@ MonoBehaviour:
   minusButton: {fileID: 875256936671990008}
   itemType: 0
   tradeMode: 0
-  planetMarket: {fileID: 314060055}
   tradeAmount: 0
   index: 0
   buyMode: 0

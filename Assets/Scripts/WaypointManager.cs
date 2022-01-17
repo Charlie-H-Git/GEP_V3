@@ -7,14 +7,20 @@ public class WaypointManager : MonoBehaviour
 {
     private PlayerController _playerController;
     public List<UnityEngine.GameObject> waypoints = new List<UnityEngine.GameObject>();
-
+    public GameObject tradeHud;
     private Vector3 _worldPos;
-
+    
+    
     private UnityEngine.GameObject _currentWaypoint;
 
     public UnityEngine.GameObject waypointGO;
 
     public int waypointCount;
+
+    private void Start()
+    {
+        allowWaypoint = true;
+    }
 
     public UnityEngine.GameObject currentWaypoint
     {
@@ -32,8 +38,10 @@ public class WaypointManager : MonoBehaviour
         }
     }
 
+    public bool allowWaypoint;
     void Waypoint()
     {
+        
         waypoints.Capacity++;
 
         if (waypointCount + 1 < waypoints.Count)
@@ -57,13 +65,12 @@ public class WaypointManager : MonoBehaviour
 
     private void Update()
     {
+        
         Vector3 mousePos = Input.mousePosition;
-
         mousePos.z = Camera.main.nearClipPlane;
         _worldPos = Camera.main.ScreenToWorldPoint(mousePos);
-       
-
-        if (Input.GetKeyDown(KeyCode.Mouse0))
+        
+        if (Input.GetKeyDown(KeyCode.Mouse0) && allowWaypoint ) 
         {
             Waypoint();
         }

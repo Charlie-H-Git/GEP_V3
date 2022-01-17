@@ -24,7 +24,7 @@ public class TabGroup : MonoBehaviour
         tabButtons.Add(button);
     }
     
-
+    
     public void OnTabEnter(TabButtonScript button)
     {
         ResetTabs();
@@ -43,6 +43,7 @@ public class TabGroup : MonoBehaviour
 
     public void OnTabSelected(TabButtonScript button)
     {
+        Debug.Log("TAB SELECTED");
         selectedTab = button;
         ResetTabs();
         button.background.color = tabActive;

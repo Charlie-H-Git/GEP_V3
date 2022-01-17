@@ -46,11 +46,11 @@ public class WaypointController : MonoBehaviour
 
     private void OnTriggerStay(Collider other)
     {
-        Debug.Log("TRIGGERED");
+        //Debug.Log("TRIGGERED");
         if (other.gameObject.CompareTag("Player"))
         {
             arrived = true;
-            Debug.Log("Player has Arrived");
+            //Debug.Log("Player has Arrived");
             if (arrived)
             {
                 Destroy(this.gameObject);  
