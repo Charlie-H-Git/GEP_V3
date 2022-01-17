@@ -38,7 +38,7 @@ public class WaypointController : MonoBehaviour
         {
             //if (hit.transform.gameObject.CompareTag("Planet"))
             {
-                Debug.Log("PLANET");
+                //Debug.Log("PLANET");
                 gameObject.transform.parent = hit.collider.gameObject.transform;
             }
         }

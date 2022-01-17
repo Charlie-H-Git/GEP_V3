@@ -11,6 +11,7 @@ public class PlayerTradeController : MonoBehaviour
     public float floatWallet;
 
     public Canvas storageHUD;
+    public TMP_Text playerWallet;
 
     public GameObject unit;
     private List<GameObject> _unitList = new List<GameObject>();
@@ -21,7 +22,7 @@ public class PlayerTradeController : MonoBehaviour
     public int storageCapacity;
     [Range(0,500)]public int activeStorage;
     private float _unitAmount;
-    private float unitCount = 66;
+    private int unitCount = 66;
 
     private void Start()
     { 
@@ -34,7 +35,7 @@ public class PlayerTradeController : MonoBehaviour
                _unitList[i].gameObject.SetActive(false);
             }
         }
-        Debug.Log(_unitList.Count);
+        //Debug.Log(_unitList.Count);
         StartCoroutine(InventoryTick());
     }
 
@@ -51,10 +52,10 @@ public class PlayerTradeController : MonoBehaviour
 
     private void cargo()
     {
-        int division = storageCapacity / _unitList.Count;
+        int division = storageCapacity / unitCount;
         int activeUnits = storageCapacity - (storageCapacity - activeStorage);
         activeUnits = activeUnits / division;
-        Debug.Log(division);
+        //Debug.Log(division);
         foreach (var gameObject in _unitList)
         {
             int index = gameObject.transform.GetSiblingIndex();
@@ -79,7 +80,9 @@ public class PlayerTradeController : MonoBehaviour
     public void Wallet()
     {
         walletTMPText.text = floatWallet.ToString("C");
+        playerWallet.text = floatWallet.ToString("C");
     }
+    
     private void Update()
     {
         

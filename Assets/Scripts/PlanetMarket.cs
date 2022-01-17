@@ -2,14 +2,21 @@
 using System.Collections;
 using System.Collections.Generic;
 using System.Resources;
+using TMPro;
 using UnityEngine;
+using UnityEngine.PlayerLoop;
 
 
 public class PlanetMarket : MonoBehaviour
 {
     public List<TradeGoods> TradeGoodsList;
     public List<TradeGoodsBaseline> TradeGoodsBaselines;
-
+    public float PlanetWallet;
+    //public UI_item uIitemScript;
+    public TMP_Text planetWalletUI;
+    public TMP_Text planetName;
+    public GameObject TradeHud;
+    public PlanetMarkEnum PlanetMarkEnum;
     /// <summary>
     /// price and quantity as baselines
     ///
@@ -63,18 +70,39 @@ public class PlanetMarket : MonoBehaviour
 
         yield return new WaitForSeconds(0.5f);
         //print("ding");
+        if (trading)
+        {
+            planetWalletUI.text = PlanetWallet.ToString("C");
+            planetName.text = gameObject.name;  
+        }
+        
         StartCoroutine(PriceCalc());
 
     }
 
-    public int dif;
+    private int dif;
     private float negMultiplier;
     private float multiplier; 
     private void Awake()
     {
         StartCoroutine(PriceCalc());
     }
+
+    private bool trading = false;
+    private void OnTriggerEnter(Collider other)
+    {
+        TradeHud.SetActive(true);
+        trading = true;
+    }
+
+    private void OnTriggerExit(Collider other)
+    {
+        TradeHud.SetActive(false);
+        trading = false;
+    }
 }
+
+
 [System.Serializable]
 public class TradeGoods
 {
@@ -89,3 +117,4 @@ public class TradeGoodsBaseline
     public double Price;
     public int Quantity;
 }
+
