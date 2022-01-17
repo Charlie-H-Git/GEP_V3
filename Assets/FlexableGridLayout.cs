@@ -30,7 +30,7 @@ public class FlexableGridLayout : LayoutGroup
             rows = Mathf.CeilToInt(transform.childCount / (float)columns);
         }
 
-        if (fitType == FitType.Width)
+        if (fitType == FitType.Height)
         {
             columns = Mathf.CeilToInt(transform.childCount / (float)rows);
         }
