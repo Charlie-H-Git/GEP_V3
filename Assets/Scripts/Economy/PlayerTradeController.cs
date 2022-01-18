@@ -46,15 +46,38 @@ public class PlayerTradeController : MonoBehaviour
     {
         Wallet();
         cargo();
+        invUpdate();
         //Debug.Log($"activeUnits = " + activeUnits + $" previousActiveUnits = " + _previousActiveUnits +  $" nullUnits = " + nullUnits);
-        yield return new WaitForSeconds(0.1f);
+        yield return new WaitForSeconds(0.01f);
         
         StartCoroutine(InventoryTick());
     }
 
+    public int a;
+
+    public bool traded;
+    private void invUpdate()
+    {
+        if (traded)
+        {
+            foreach (var trade in PlayerInventory)
+            {
+                a += trade.Quantity;
+                
+                //print("Sum Done");
+            }
+            
+            activeStorage =  a;
+            traded = false;
+            
+        }
+        else
+        {
+            a = 0;
+        }
+    }
     private void cargo()
     {
-        
         int division = storageCapacity / unitCount;
         int activeUnits = storageCapacity - (storageCapacity - activeStorage);
         activeUnits = activeUnits / division;

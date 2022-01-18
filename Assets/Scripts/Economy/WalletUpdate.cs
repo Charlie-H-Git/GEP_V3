@@ -32,8 +32,8 @@ public class WalletUpdate : MonoBehaviour
         if (_planetMarket.trading)
         {
             text.text = PTC.floatWallet.ToString("C");
-            yield return new WaitForSeconds(0.1f);
-            walletUiUpdate(); 
+            yield return new WaitForSeconds(0.01f);
+            StartCoroutine(walletUiUpdate()); 
         }
     }
 }
