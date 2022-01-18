@@ -22,6 +22,7 @@ public class UI_item : MonoBehaviour
     public TMP_Text nameText;
     public TMP_Text costText;
     public TMP_Text quantityText;
+    public TMP_Text playerQuant;
    
     [Header("Buttons // UI Items")]
     public TMP_InputField inputField;
@@ -70,6 +71,8 @@ public class UI_item : MonoBehaviour
                 break;
         }
         tradeButton.onClick.AddListener(TradeBtnClick);
+        minusButton.onClick.AddListener(IncrementDown);
+        plusButton.onClick.AddListener(IncrementUp);
         StartCoroutine(TradePanel());
     }
 
@@ -104,6 +107,7 @@ public class UI_item : MonoBehaviour
     {
         TradeCap();
         nameText.text = itemType.ToString();
+        playerQuant.text = "Player Stock = " + _playerTradeController.PlayerInventory[index].Quantity.ToString();
         costText.text = ("Cost = " + planetMarket.TradeGoodsList[index].Price.ToString("C"));
         quantityText.text = "Quantity = " + planetMarket.TradeGoodsList[index].Quantity;
         int.TryParse(inputField.text, out int result);
@@ -133,8 +137,21 @@ public class UI_item : MonoBehaviour
     /// <summary>
     /// TODO: Add limit and rejection for transactions bigger than players total balance do the same for planet wallet too
     /// </summary>
-    
 
+    void IncrementDown()
+    {
+        int.TryParse(inputField.text, out int result);
+        result--;
+        inputField.text = result.ToString();
+    }
+
+    void IncrementUp()
+    {
+        int.TryParse(inputField.text, out int result);
+        result++;
+        inputField.text = result.ToString();
+    }
+    
     void TradeBtnClick()
     {
         //Debug.Log($"trade amount " + tradeAmount + $" sum " + planetMarket.TradeGoodsList[index].Quantity);
