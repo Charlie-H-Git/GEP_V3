@@ -11,6 +11,7 @@ public class TabButtonScript : MonoBehaviour, IPointerEnterHandler,IPointerClick
 
     public Image background;
     
+    //This script uses the event system in unity to check for mouse position relative to UI components
     public void OnPointerEnter(PointerEventData eventData)
     {
         tabGroup.OnTabSelected(this);
@@ -26,7 +27,7 @@ public class TabButtonScript : MonoBehaviour, IPointerEnterHandler,IPointerClick
         tabGroup.OnTabExit(this);
     }
     
-    // Start is called before the first frame update
+    //This class add the gameobject to the tab list in the TabGroup 
     void Start()
     {
         background = GetComponent<Image>();

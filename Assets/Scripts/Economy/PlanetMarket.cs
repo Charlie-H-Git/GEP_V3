@@ -21,7 +21,7 @@ public class PlanetMarket : MonoBehaviour
     /// <summary>
     /// price and quantity as baselines
     ///
-    /// every 60 seconds unless trading, cycle through the quantities
+    /// every 0.1 seconds unless trading, cycle through the quantities
     /// and if they are below their baselines then the price is MULTIPLIED dependant on a
     /// factor of how below their quantity and vicer-versa for above quantity
     /// the new updated values are reflected in the TradeGoods public Class List

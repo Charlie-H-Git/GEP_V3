@@ -10,11 +10,12 @@ public class TabGroup : MonoBehaviour
     public TabButtonScript selectedTab;
 
     public List<GameObject> ui_Pages;
-    public int panelIndex;
 
     public Color tabIdle;
     public Color tabHover;
     public Color tabActive;
+    
+    //this Class Adds all the tabs to the Tab list
     public void Subscribe(TabButtonScript button)
     {
         if (tabButtons == null)
@@ -25,6 +26,7 @@ public class TabGroup : MonoBehaviour
     }
     
     
+    //This Class changes the Hovered Tab to the TabHover Colour and all other tabs to their normal colour
     public void OnTabEnter(TabButtonScript button)
     {
         ResetTabs();
@@ -35,12 +37,14 @@ public class TabGroup : MonoBehaviour
         
     }
 
+    //This class Calls the reset Tab Class when the mouse exits the buttons bounding box
     public void OnTabExit(TabButtonScript button)
     {
         ResetTabs();
-        //button.background.color = tabIdle;
+        
     }
 
+    //this class enables the selected tabs corresponding UI page and disable all others
     public void OnTabSelected(TabButtonScript button)
     {
         Debug.Log("TAB SELECTED");
@@ -61,6 +65,7 @@ public class TabGroup : MonoBehaviour
         }
     }
 
+    //this class cycles through each tab in the Button list and sets any tab that isn't selected to Idle Colour
     public void ResetTabs()
     {
         foreach (TabButtonScript button in tabButtons)

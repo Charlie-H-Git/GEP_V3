@@ -116,8 +116,7 @@ public class UI_item : MonoBehaviour
         StartCoroutine(TradePanel());
     }
 
-    
-    //TODO add limiter on tradeamount by capping input at cargo capacity / remaining cargo capacity
+
     private void TradeCap()
     {
         int capacity = _playerTradeController.storageCapacity;
@@ -134,9 +133,7 @@ public class UI_item : MonoBehaviour
         }
     }
 
-    /// <summary>
-    /// TODO: Add limit and rejection for transactions bigger than players total balance do the same for planet wallet too
-    /// </summary>
+    
 
     void IncrementDown()
     {
